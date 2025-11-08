@@ -1,0 +1,69 @@
+@use "../../styles/variables" as *;
+
+.home {
+  height: calc(100vh - 7.2rem);
+  display: flex;
+
+  div {
+    flex: 1;
+  }
+  .right-side {
+    .content {
+      margin-left: 4rem;
+      margin-top: 3rem;
+
+      h1 {
+        margin-bottom: 1.5rem;
+        font-size: 50px;
+        font-family: $h1-font;
+
+        span {
+          color: $primary-color;
+        }
+      }
+
+      p {
+        text-align: justify;
+        font-size: 20px;
+        font-family: $p-font;
+      }
+
+      a {
+        font-size: 18px;
+        margin-top: 2rem;
+        display: inline-block;
+        background-color: $primary-color;
+        color: white;
+        padding: 1rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: 400;
+        text-decoration: none;
+        font-family: $p-font;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+
+        &:hover {
+          background-color: $hover-color;
+          transform: scale(1.03);
+        }
+
+        &:active {
+          transform: scale(0.97);
+        }
+      }
+    }
+  }
+
+  .left-side {
+    .content {
+      margin-right: 2rem;
+      align-items: center;
+      justify-items: center;
+
+      img {
+        max-height: 35rem;
+        width: auto;
+      }
+    }
+  }
+}

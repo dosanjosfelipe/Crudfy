@@ -1,0 +1,45 @@
+@use "../../styles/variables" as *;
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  align-items: center;
+
+  img {
+    max-height: 3.7rem;
+    width: auto;
+    margin-top: 1.5rem;
+    margin-left: 4rem;
+  }
+
+  nav {
+    font-weight: 900;
+    margin-top: 2rem;
+    font-family: $p-font;
+    font-size: 22px;
+    align-items: center;
+    display: flex;
+    gap: 3rem;
+    margin-right: 5rem;
+
+    a {
+      text-decoration: none;
+      color: $font-color;
+      padding: 0.5rem 1.5rem;
+      border-radius: 18px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $primary-color;
+        color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: scale(0.97);
+      }
+    }
+  }
+}

@@ -1,0 +1,397 @@
+@use "../../styles/variables" as *;
+
+/*
+|--------------------------------------------------------------------------
+| Variáveis e Mixins Locais
+|--------------------------------------------------------------------------
+*/
+
+$delete-color: rgb(245, 22, 22);
+$delete-color-hover: rgb(226, 21, 21);
+$border-color-light: #ddd;
+$text-color-dark: #333;
+$text-color-muted: #888;
+$background-light: #fafafa;
+$border-color-muted: #ccc;
+$border-color-default: #3a3a3a;
+
+/*
+|--------------------------------------------------------------------------
+| Estilos Gerais do Dashboard
+|--------------------------------------------------------------------------
+*/
+.dashboard {
+  height: calc(100vh - 7.2rem);
+  width: 100vw;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+
+  .left-side,
+  .middle-side,
+  .right-side {
+    .box {
+      margin-top: 2rem;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: auto;
+      height: auto;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-color: rgb(255, 255, 255);
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    width: 100%;
+    font-style: italic;
+    color: $text-color-muted;
+    font-size: 0.95rem;
+    background: $background-light;
+    border: 1px dashed $border-color-muted;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Left Side - Formulários
+  |--------------------------------------------------------------------------
+  */
+  .left-side {
+    flex: 0 0 calc(25% - 0.8rem);
+    align-items: center;
+    justify-items: center;
+
+    .box {
+      max-width: 20rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+
+      &:nth-of-type(2) {
+        margin-top: 2rem;
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      input[type="text"],
+      textarea {
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+        border: 2px solid $border-color-muted;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.2s ease-in-out;
+        width: 100%;
+
+        &:focus {
+          border-color: $hover-color;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+          outline: none;
+        }
+
+        &::placeholder {
+          color: #999;
+          font-style: italic;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      #createList,
+      #editList,
+      #createItem,
+      #editItem {
+        font-size: 18px;
+        display: inline-block;
+        background-color: $primary-color;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: 400;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $hover-color;
+          transform: scale(1.03);
+        }
+
+        &:active {
+          transform: scale(0.97);
+        }
+      }
+    }
+  }
+
+  /*
+|--------------------------------------------------------------------------
+| Middle Side - Listas e Itens
+|--------------------------------------------------------------------------
+*/
+  .middle-side {
+    flex: 0 0 calc(45% - 0.8rem);
+    align-items: center;
+    justify-items: center;
+
+    .box {
+      overflow-y: hidden;
+      min-width: 20rem;
+      max-height: 32rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+      width: 100%;
+    }
+
+    .list-side,
+    .item-side {
+      flex: 1 1 50%;
+
+      min-width: 0;
+
+      padding: 0 1rem;
+      border-right: 1px solid #eee;
+      overflow-y: auto;
+      max-height: 25rem;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      h2 {
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      #newItem {
+        margin-bottom: 1rem;
+        width: 100%;
+        color: white;
+        background-color: $primary-color;
+        border-radius: 10px;
+        font-size: 1rem;
+        text-align: left;
+        transition: all 0.2s ease-in-out;
+        padding: 12px 16px;
+        cursor: pointer;
+        border: none;
+
+        &:hover {
+          transform: scale(1.02);
+        }
+
+        &:active {
+          transform: scale(0.97);
+        }
+      }
+    }
+
+    .noLists,
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      #newList {
+        color: white;
+        background-color: $primary-color;
+        border-radius: 10px;
+        font-size: 1rem;
+        text-align: left;
+        transition: all 0.2s ease-in-out;
+        padding: 12px 16px;
+        cursor: pointer;
+        border: none;
+
+        &:hover {
+          transform: scale(1.02);
+        }
+
+        &:active {
+          transform: scale(0.97);
+        }
+      }
+
+      li {
+        border-radius: 10px;
+        font-size: 1rem;
+        text-align: left;
+        transition: all 0.2s ease-in-out;
+
+        &.selected {
+          border-color: $hover-color;
+          box-shadow: 0 0 5px rgba(157, 0, 255, 0.5);
+          outline: none;
+        }
+
+        button {
+          white-space: normal;
+          overflow-wrap: break-word;
+          width: 100%;
+          display: block;
+          background: none;
+          color: inherit;
+          border: 1px solid $border-color-default;
+          padding: 12px 16px;
+          text-align: inherit;
+          cursor: pointer;
+          border-radius: inherit;
+          font-size: 1rem;
+        }
+
+        &:hover {
+          transform: scale(1.02);
+          background-color: #f5f5f5;
+        }
+
+        &:active {
+          transform: scale(0.97);
+        }
+      }
+
+      .empty-state {
+        margin-top: 1rem;
+        text-align: center;
+        width: 100%;
+        font-style: italic;
+        color: $text-color-muted;
+        font-size: 0.95rem;
+        background: $background-light;
+        border: 1px dashed $border-color-muted;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+    }
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Right Side - Visualização e Detalhes
+  |--------------------------------------------------------------------------
+  */
+  .right-side {
+    flex: 0 0 calc(30% - 0.8rem);
+    align-items: center;
+    justify-items: center;
+    margin-right: 0;
+    padding-right: 0;
+
+    .box {
+      display: flex;
+      flex-direction: column;
+      min-width: 24rem;
+      max-width: 24rem;
+      margin-right: 0;
+
+      h2 {
+        text-align: center;
+        width: 100%;
+        font-size: 1.3rem;
+      }
+
+      .details {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        text-align: left;
+      }
+
+      .detail-row {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .detail-row-dates {
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+
+        .column {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      .label {
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin-bottom: 0.3rem;
+        white-space: nowrap;
+        text-align: left;
+
+        .detail-row-dates & {
+          text-align: center;
+        }
+      }
+
+      .value {
+        color: $text-color-dark;
+        background-color: white;
+        border: 1px solid $border-color-light;
+        border-radius: 8px;
+        padding: 0.6rem 0.75rem;
+        font-size: 0.95rem;
+        word-break: break-word;
+        white-space: normal;
+        overflow-wrap: break-word;
+        text-align: left;
+
+        .detail-row-dates & {
+          text-align: center;
+        }
+      }
+
+      .delete-button {
+        padding: 0.5rem 3rem;
+        background-color: $delete-color;
+        border-radius: 8px;
+        color: white;
+        margin-top: 1rem;
+        font-size: 18px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $delete-color-hover;
+          transform: scale(1.03);
+        }
+
+        &:active {
+          transform: scale(0.97);
+        }
+      }
+    }
+  }
+}
