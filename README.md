@@ -37,5 +37,3 @@ O projeto foi desenvolvido com os seguintes propósitos:
 - Interface responsiva e moderna.
 
 ---
-
-## 🧱 Estrutura do Projeto
